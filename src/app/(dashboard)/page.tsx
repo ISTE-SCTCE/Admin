@@ -1,5 +1,8 @@
+"use client";
+
 import { StatCard } from "@/components/StatCard";
 import { Users, Calendar, Activity, PieChart, Bell, Plus, UserPlus, Send, FileText } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -15,10 +18,10 @@ export default function Home() {
             <Bell size={18} />
             Notifications
           </button>
-          <button className="btn-primary">
+          <Link href="/events" className="btn-primary">
             <Plus size={18} />
             New Event
-          </button>
+          </Link>
         </div>
       </header>
 
@@ -64,7 +67,7 @@ export default function Home() {
         <div className="bg-surface rounded-2xl shadow-md overflow-hidden">
           <div className="p-6 border-b border-border flex justify-between items-center">
             <h3 className="text-lg font-bold text-text-primary">Recent Events</h3>
-            <a href="#" className="text-sm font-medium text-primary hover:underline">View All</a>
+            <Link href="/events" className="text-sm font-medium text-primary hover:underline">View All</Link>
           </div>
           <div className="p-6 flex flex-col gap-4">
             {/* Activity Items */}
@@ -107,22 +110,22 @@ export default function Home() {
         <div className="bg-surface rounded-2xl shadow-md p-6">
           <h3 className="text-lg font-bold text-text-primary mb-4 p-2 border-b border-border">Quick Actions</h3>
           <div className="grid gap-3">
-            <button className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
+            <Link href="/members" className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
               <UserPlus size={20} className="text-text-secondary" />
               Add Member
-            </button>
-            <button className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
+            </Link>
+            <Link href="/events" className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
               <Calendar size={20} className="text-text-secondary" />
               Create Event
-            </button>
+            </Link>
             <button className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
               <Send size={20} className="text-text-secondary" />
               Send Announcement
             </button>
-            <button className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
+            <Link href="/reports" className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
               <FileText size={20} className="text-text-secondary" />
               Generate Report
-            </button>
+            </Link>
           </div>
         </div>
       </div>
