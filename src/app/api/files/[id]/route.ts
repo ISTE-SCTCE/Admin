@@ -10,7 +10,7 @@ export async function DELETE(
     try {
         const { id: idStr } = await params;
         const id = parseInt(idStr);
-        const files = db.files.findAll();
+        const files = await db.files.findAll();
         const file = files.find(f => f.id === id);
 
         if (!file) {
@@ -27,7 +27,7 @@ export async function DELETE(
         }
 
         // Delete from DB
-        db.files.delete(id);
+        await db.files.delete(id);
 
         return NextResponse.json({ success: true });
     } catch (error) {

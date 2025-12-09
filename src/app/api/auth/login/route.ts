@@ -6,9 +6,8 @@ export async function POST(request: Request) {
     try {
         const { email, password } = await request.json();
 
-        // Check against DB
-        // @ts-ignore
-        const users = db.users.findAll();
+        // Check against DB (now async)
+        const users = await db.users.findAll();
 
         const user = users.find((u: any) => u.email === email && u.password === password);
 

@@ -7,9 +7,8 @@ export async function GET() {
     const currentEmail = cookieStore.get("user_email")?.value;
 
     // Get all users (to check last_seen)
-    // @ts-ignore
-    const users = db.users.findAll();
-    const members = db.members.findAll();
+    const users = await db.users.findAll();
+    const members = await db.members.findAll();
 
     // Threshold for "Active" is 5 minutes
     const FIVE_MINUTES = 5 * 60 * 1000;

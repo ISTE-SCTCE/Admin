@@ -19,14 +19,13 @@ export async function GET(request: Request) {
     }
 
     // Find current user id
-    // @ts-ignore
-    const users = db.users.findAll();
+    const users = await db.users.findAll();
     const currentUser = users.find((u: any) => u.email === email);
 
     if (!currentUser) return NextResponse.json([]);
 
     const currentUserId = currentUser.id;
-    const allMessages = db.messages.findAll();
+    const allMessages = await db.messages.findAll();
 
     // Filter messages between current user and target
     const filtered = allMessages.filter((m: any) =>
@@ -51,13 +50,12 @@ export async function POST(request: Request) {
         const cookieStore = await cookies();
         const email = cookieStore.get("user_email")?.value;
 
-        // @ts-ignore
-        const users = db.users.findAll();
+        const users = await db.users.findAll();
         const currentUser = users.find((u: any) => u.email === email);
 
         if (!currentUser) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-        const newMsg = db.messages.create({
+        const newMsg = await db.messages.create({
             from: currentUser.id,
             to,
             content

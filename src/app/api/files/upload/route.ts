@@ -38,7 +38,7 @@ export async function POST(request: Request) {
         const uploadedBy = cookieStore.get('user_name')?.value || 'Admin';
 
         // Save metadata to DB
-        const newFile = db.files.create({
+        const newFile = await db.files.create({
             filename: filename,
             original_name: file.name,
             file_size: file.size,

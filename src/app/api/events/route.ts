@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
 export async function GET() {
-    const events = db.events.findAll(); // We need to add 'findAll' to db.events
+    const events = await db.events.findAll();
     return NextResponse.json(events);
 }
 
@@ -11,7 +11,7 @@ export async function POST(request: Request) {
         const body = await request.json();
         const { title, date, type, description } = body;
 
-        const newEvent = db.events.create({
+        const newEvent = await db.events.create({
             title,
             date,
             type,
