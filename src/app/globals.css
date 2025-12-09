@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-light: var(--primary-light);
+
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+
+  --color-border: var(--border);
+
+  /* Keep semantic colors static for now or variable if needed */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+
+  --font-sans: var(--font-inter);
+}
+
+/* Light Theme (Default) */
+:root {
+  /* Blue Default */
+  --primary: #2563EB;
+  --primary-hover: #1D4ED8;
+  --primary-light: #3B82F6;
+
+  --background: #F8FAFC;
+  --surface: #FFFFFF;
+
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-tertiary: #94A3B8;
+
+  --border: #E2E8F0;
+}
+
+/* Dark Theme */
+.dark {
+  --background: #0F172A;
+  --surface: #1E293B;
+
+  --text-primary: #F1F5F9;
+  --text-secondary: #CBD5E1;
+  --text-tertiary: #94A3B8;
+
+  --border: #334155;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans), sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+@layer components {
+  .btn-primary {
+    @apply flex items-center gap-2 px-5 py-3 border-none rounded-xl font-medium cursor-pointer transition-all shadow-md text-white justify-center;
+    background-color: var(--primary);
+  }
+
+  .btn-primary:hover {
+    @apply -translate-y-[2px] shadow-lg;
+    background-color: var(--primary-hover);
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Test Event",
+    "description": "This is a test event",
+    "event_date": "2025-12-10",
+    "created_by": "anonymous",
+    "status": "upcoming",
+    "created_at": "2025-12-09T10:27:36.552Z"
+  },
+  {
+    "id": 2,
+    "title": "meeting",
+    "date": "2025-12-09",
+    "type": "meeting",
+    "description": "join the following link"
+  }
+]

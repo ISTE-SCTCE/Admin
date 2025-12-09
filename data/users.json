@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "name": "Aadithyan",
+    "email": "aadithyanrs9e@gmail.com",
+    "password": "chair123",
+    "role": "Admin",
+    "status": "active"
+  },
+  {
+    "id": 2,
+    "name": "Archa Sunil",
+    "email": "archasunil777@gmail.com",
+    "password": "vchair123",
+    "role": "Vice Chair",
+    "status": "offline",
+    "last_seen": "2025-12-09T11:35:46.304Z"
+  },
+  {
+    "id": 3,
+    "name": "Aman Tejas",
+    "email": "amantejas05@gmail.com",
+    "password": "sec123",
+    "role": "Secretary",
+    "status": "online"
+  },
+  {
+    "id": 4,
+    "name": "Neha Sanjeev",
+    "email": "nehasanjeevkrishna@gmail.com",
+    "password": "jsec123",
+    "role": "Joint-Secretary",
+    "status": "busy"
+  },
+  {
+    "id": 5,
+    "name": "Abhiram Manoj",
+    "email": "abhirammanoj13@gmail.com",
+    "password": "treas123",
+    "role": "Treasurer",
+    "status": "offline"
+  },
+  {
+    "id": 6,
+    "name": "Arya Shibu",
+    "email": "aryashibu73@gmail.com",
+    "password": "streas123",
+    "role": "Sub-Treasurer",
+    "status": "active"
+  },
+  {
+    "id": 7,
+    "name": "Anjana Pradeep",
+    "email": "anjanapradeep512@gmail.com",
+    "password": "thead123",
+    "role": "Technical Head",
+    "status": "active"
+  },
+  {
+    "id": 8,
+    "name": "Design Head",
+    "email": "design@admin.com",
+    "password": "dhead123",
+    "role": "Design Head",
+    "status": "offline"
+  },
+  {
+    "id": 9,
+    "name": "Abhinav BR",
+    "email": "aabhinavbr@gmail.com",
+    "password": "mhead123",
+    "role": "Media Head",
+    "status": "active"
+  },
+  {
+    "id": 10,
+    "name": "Hareesh MS",
+    "email": "hareeshms6665@gmail.com",
+    "password": "marhead123",
+    "role": "Marketing Head",
+    "status": "busy"
+  },
+  {
+    "id": 11,
+    "name": "Activity Coordinator",
+    "email": "activity@admin.com",
+    "password": "acthead123",
+    "role": "Activity Coordinator",
+    "status": "offline"
+  },
+  {
+    "id": 12,
+    "name": "Membership Head",
+    "email": "membership@admin.com",
+    "password": "mdhead123",
+    "role": "Membership-drive Head",
+    "status": "offline"
+  },
+  {
+    "id": 13,
+    "name": "Unnikrishnan",
+    "email": "unnikrishnan44013au@gmail.com",
+    "password": "schair123",
+    "role": "Chairman-SwaS",
+    "status": "active"
+  }
+]

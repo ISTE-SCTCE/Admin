@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "filename": "1765276069527-834117844.txt",
+    "original_name": "test.txt",
+    "file_size": 39,
+    "mime_type": "text/plain",
+    "uploaded_by": "anonymous",
+    "file_path": "/uploads/1765276069527-834117844.txt",
+    "uploaded_at": "2025-12-09T10:27:49.530Z"
+  },
+  {
+    "id": 2,
+    "filename": "1765276202323-430596597.txt",
+    "original_name": "test_large.txt",
+    "file_size": 480,
+    "mime_type": "text/plain",
+    "uploaded_by": "anonymous",
+    "file_path": "/uploads/1765276202323-430596597.txt",
+    "uploaded_at": "2025-12-09T10:30:02.326Z"
+  }
+]

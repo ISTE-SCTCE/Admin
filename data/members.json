@@ -1,0 +1,106 @@
+[
+    {
+        "id": 1,
+        "name": "Aadithyan",
+        "email": "aadithyanrs9e@gmail.com",
+        "role": "Admin",
+        "status": "active",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Aadithyan"
+    },
+    {
+        "id": 2,
+        "name": "Archa Sunil",
+        "email": "archasunil777@gmail.com",
+        "role": "Vice Chair",
+        "status": "offline",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Archa"
+    },
+    {
+        "id": 3,
+        "name": "Aman Tejas",
+        "email": "amantejas05@gmail.com",
+        "role": "Secretary",
+        "status": "active",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Aman"
+    },
+    {
+        "id": 4,
+        "name": "Neha Sanjeev",
+        "email": "nehasanjeevkrishna@gmail.com",
+        "role": "Joint-Secretary",
+        "status": "busy",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Neha"
+    },
+    {
+        "id": 5,
+        "name": "Abhiram Manoj",
+        "email": "abhirammanoj13@gmail.com",
+        "role": "Treasurer",
+        "status": "offline",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Abhiram"
+    },
+    {
+        "id": 6,
+        "name": "Arya Shibu",
+        "email": "aryashibu73@gmail.com",
+        "role": "Sub-Treasurer",
+        "status": "active",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Arya"
+    },
+    {
+        "id": 7,
+        "name": "Anjana Pradeep",
+        "email": "anjanapradeep512@gmail.com",
+        "role": "Technical Head",
+        "status": "active",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Anjana"
+    },
+    {
+        "id": 8,
+        "name": "Design Head",
+        "email": "design@admin.com",
+        "role": "Design Head",
+        "status": "offline",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Design"
+    },
+    {
+        "id": 9,
+        "name": "Abhinav BR",
+        "email": "aabhinavbr@gmail.com",
+        "role": "Media Head",
+        "status": "active",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Abhinav"
+    },
+    {
+        "id": 10,
+        "name": "Hareesh MS",
+        "email": "hareeshms6665@gmail.com",
+        "role": "Marketing Head",
+        "status": "busy",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Hareesh"
+    },
+    {
+        "id": 11,
+        "name": "Activity Coordinator",
+        "email": "activity@admin.com",
+        "role": "Activity Coordinator",
+        "status": "offline",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Activity"
+    },
+    {
+        "id": 12,
+        "name": "Membership Head",
+        "email": "membership@admin.com",
+        "role": "Membership-drive Head",
+        "status": "offline",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Membership"
+    },
+    {
+        "id": 13,
+        "name": "Unnikrishnan",
+        "email": "unnikrishnan44013au@gmail.com",
+        "role": "Chairman-SwaS",
+        "status": "active",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Unnikrishnan"
+    }
+]
