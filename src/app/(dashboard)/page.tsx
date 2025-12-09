@@ -1,8 +1,9 @@
 "use client";
 
 import { StatCard } from "@/components/StatCard";
-import { Users, Calendar, Activity, PieChart, Bell, Plus, UserPlus, Send, FileText } from "lucide-react";
+import { Users, Calendar, Activity, PieChart, Plus, UserPlus, Send, FileText } from "lucide-react";
 import Link from "next/link";
+import { NotificationsDropdown } from "@/components/NotificationsDropdown";
 
 export default function Home() {
   return (
@@ -14,10 +15,7 @@ export default function Home() {
           <p className="text-text-secondary">Welcome back! Here&apos;s what&apos;s happening today.</p>
         </div>
         <div className="flex gap-3">
-          <button className="flex items-center gap-2 px-4 py-3 bg-surface border border-border rounded-xl font-semibold hover:bg-background transition-colors cursor-pointer text-text-primary">
-            <Bell size={18} />
-            Notifications
-          </button>
+          <NotificationsDropdown />
           <Link href="/events" className="btn-primary">
             <Plus size={18} />
             New Event
