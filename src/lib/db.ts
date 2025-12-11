@@ -343,7 +343,7 @@ export const db = {
         update: async (action_key: string, allowed_roles: string[]) => {
             const { data, error } = await supabase
                 .from('permission_settings')
-                .upsert({ action_key, allowed_roles })
+                .upsert({ action_key, allowed_roles }, { onConflict: 'action_key' })
                 .select()
                 .single();
             if (error) throw error;
