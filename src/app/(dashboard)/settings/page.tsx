@@ -174,7 +174,7 @@ function PermissionsSection() {
         { key: 'create_event', label: 'Create Events' },
     ];
 
-    const ROLES = ['chair', 'vice chair', 'secretary', 'joint secretary', 'treasurer', 'member'];
+    const ROLES = ['vice chair', 'secretary', 'joint secretary', 'treasurer', 'member'];
 
     return (
         <section className="bg-surface p-6 rounded-2xl shadow-sm border border-border">
