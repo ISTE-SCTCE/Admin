@@ -322,64 +322,67 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Quick Actions */}
-          <div className="relative rounded-2xl">
-            <GlowingEffect
-              disabled={false}
-              glow={true}
-              proximity={64}
-              spread={40}
-              inactiveZone={0.01}
-              borderWidth={2}
-              movementDuration={1.5}
-              borderRadius="rounded-2xl"
-            />
-            <div className="relative bg-surface rounded-2xl shadow-md p-6">
-              <h3 className="text-lg font-bold text-text-primary mb-4 p-2 border-b border-border">Quick Actions</h3>
-              <div className="grid gap-3">
-                <div
-                  onClick={() => {
-                    if (hasPermission('add_members')) setIsAddMemberOpen(true);
-                  }}
-                  className={`flex items-center gap-3 p-4 border border-border rounded-xl bg-surface transition-all text-text-primary font-medium ${hasPermission('add_members')
-                    ? "hover:bg-background hover:border-primary cursor-pointer"
-                    : "opacity-60 cursor-not-allowed"
-                    }`}
-                >
-                  {hasPermission('add_members') ? (
-                    <UserPlus size={20} className="text-text-secondary" />
-                  ) : (
-                    <Lock size={20} className="text-text-secondary" />
-                  )}
-                  Add Member
-                </div>
-                {hasPermission('create_event') ? (
-                  <Link href="/events" className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
-                    <Calendar size={20} className="text-text-secondary" />
-                    Create Event
-                  </Link>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="relative rounded-2xl">
+          <GlowingEffect
+            disabled={false}
+            glow={true}
+            proximity={64}
+            spread={40}
+            inactiveZone={0.01}
+            borderWidth={2}
+            movementDuration={1.5}
+            borderRadius="rounded-2xl"
+          />
+          <div className="relative bg-surface rounded-2xl shadow-md p-6">
+            <h3 className="text-lg font-bold text-text-primary mb-4 p-2 border-b border-border">Quick Actions</h3>
+            <div className="grid gap-3">
+              <div
+                onClick={() => {
+                  if (hasPermission('add_members')) setIsAddMemberOpen(true);
+                }}
+                className={`flex items-center gap-3 p-4 border border-border rounded-xl bg-surface transition-all text-text-primary font-medium ${hasPermission('add_members')
+                  ? "hover:bg-background hover:border-primary cursor-pointer"
+                  : "opacity-60 cursor-not-allowed"
+                  }`}
+              >
+                {hasPermission('add_members') ? (
+                  <UserPlus size={20} className="text-text-secondary" />
                 ) : (
-                  <div className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface opacity-60 cursor-not-allowed text-text-primary font-medium">
-                    <Lock size={20} className="text-text-secondary" />
-                    Create Event
-                  </div>
+                  <Lock size={20} className="text-text-secondary" />
                 )}
-                <Link href="/announcements" className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
-                  <Send size={20} className="text-text-secondary" />
-                  Send Announcement
-                </Link>
-                <Link href="/reports" className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
-                  <FileText size={20} className="text-text-secondary" />
-                  Generate Report
-                </Link>
+                Add Member
               </div>
+              {hasPermission('create_event') ? (
+                <Link href="/events" className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
+                  <Calendar size={20} className="text-text-secondary" />
+                  Create Event
+                </Link>
+              ) : (
+                <div className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface opacity-60 cursor-not-allowed text-text-primary font-medium">
+                  <Lock size={20} className="text-text-secondary" />
+                  Create Event
+                </div>
+              )}
+              <Link href="/announcements" className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
+                <Send size={20} className="text-text-secondary" />
+                Send Announcement
+              </Link>
+              <Link href="/reports" className="flex items-center gap-3 p-4 border border-border rounded-xl bg-surface hover:bg-background hover:border-primary transition-all text-text-primary font-medium cursor-pointer">
+                <FileText size={20} className="text-text-secondary" />
+                Generate Report
+              </Link>
             </div>
           </div>
-          <MemberModal
-            isOpen={isAddMemberOpen}
-            onClose={() => setIsAddMemberOpen(false)}
-            onSubmit={handleAddMemberSubmit}
-          />
-        </div >
-        );
+        </div>
+      </div>
+      <MemberModal
+        isOpen={isAddMemberOpen}
+        onClose={() => setIsAddMemberOpen(false)}
+        onSubmit={handleAddMemberSubmit}
+      />
+    </div >
+  );
 }
