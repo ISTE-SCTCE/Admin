@@ -10,12 +10,12 @@ export async function GET() {
 export async function POST(request: Request) {
     try {
         const cookieStore = await cookies();
-        const userRole = cookieStore.get("user_role")?.value?.toLowerCase();
+        const userRole = cookieStore.get("user_role")?.value?.toLowerCase() || '';
 
-        // Only Chair can change permissions
-        if (userRole !== 'chair') {
+        // Only Chair and Admin can change permissions
+        if (!['chair', 'admin'].includes(userRole)) {
             return NextResponse.json(
-                { error: 'Unauthorized. Only Chair can change permissions.' },
+                { error: 'Unauthorized. Only Chair and Admin can change permissions.' },
                 { status: 403 }
             );
         }
