@@ -341,11 +341,17 @@ export const db = {
             return data || [];
         },
         update: async (action_key: string, allowed_roles: string[]) => {
+            // "Poor man's upsert" to handle cases where unique constraint might be missing
+            // 1. Delete existing
+            await supabase.from('permission_settings').delete().eq('action_key', action_key);
+
+            // 2. Insert new
             const { data, error } = await supabase
                 .from('permission_settings')
-                .upsert({ action_key, allowed_roles }, { onConflict: 'action_key' })
+                .insert([{ action_key, allowed_roles }])
                 .select()
                 .single();
+
             if (error) throw error;
             return data;
         }
