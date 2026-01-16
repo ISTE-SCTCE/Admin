@@ -159,7 +159,7 @@ export default function MembersPage() {
 
     return (
         <div className="p-4 md:p-8 relative">
-            <header className="mb-8 flex justify-between items-end">
+            <header className="mb-8 flex flex-col md:flex-row md:justify-between md:items-end gap-4">
                 <div>
                     <h1 className="text-3xl font-bold mb-2 text-text-primary">Team Members</h1>
                     <p className="text-text-secondary">Manage your team and memberships.</p>
