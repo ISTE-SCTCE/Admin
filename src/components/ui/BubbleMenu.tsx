@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * BubbleMenu component
  * A playful and interactive navigation menu featuring floating "bubble" pills.
