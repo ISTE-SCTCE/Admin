@@ -132,7 +132,11 @@ export default function MembersPage() {
 
         // Filter by Tab
         if (activeTab === 'execom') {
-            const execomRoles = ['chair', 'vice chair', 'secretary', 'admin'];
+            const execomRoles = [
+                'chair', 'vice chair', 'secretary', 'admin',
+                'media team', 'design team', 'treasury', 'sub treasury',
+                'activity coordinator', 'marketing team'
+            ];
             const isExecom = execomRoles.some(r => role.includes(r));
             if (!isExecom) return false;
         }
