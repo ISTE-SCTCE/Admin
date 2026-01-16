@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "@/components/ThemeProvider";
+import { useTheme } from "@/components/providers/ThemeProvider";
 import { Moon, Sun, Check, Palette, Lock } from "lucide-react";
 import clsx from "clsx";
 import { useState, useEffect } from "react";

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Plus, MapPin, Clock, Trash2, Calendar } from "lucide-react";
 import clsx from "clsx";
 import useSWR from "swr";
-import { EventModal } from "@/components/EventModal";
+import { EventModal } from "@/components/features/events/EventModal";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -228,8 +228,6 @@ export default function EventsPage() {
                                     const isUpcoming = eventDate >= new Date(new Date().setHours(0, 0, 0, 0));
                                     const isPast = !isUpcoming;
                                     const canDelete = userRole === 'Chair' || userRole === 'Vice Chair' || userRole === 'Admin';
-
-                                    console.log('User role:', userRole, 'Can delete:', canDelete);
 
                                     return (
                                         <div

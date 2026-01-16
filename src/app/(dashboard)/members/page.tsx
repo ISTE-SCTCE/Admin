@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { MessageCircle, MoreVertical, Search, Filter } from "lucide-react";
 import clsx from "clsx";
-import { ChatDrawer } from "@/components/ChatDrawer";
+import { ChatDrawer } from "@/components/features/members/ChatDrawer";
 
 // Define Member type locally for now or import from shared types
 interface Member {

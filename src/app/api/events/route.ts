@@ -1,12 +1,11 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { cookies } from 'next/headers';
 
 export async function GET() {
     const events = await db.events.findAll();
     return NextResponse.json(events);
 }
-
-import { cookies } from 'next/headers';
 
 export async function POST(request: Request) {
     try {

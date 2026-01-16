@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "Modern Admin Dashboard",
 };
 
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 export default function RootLayout({
   children,

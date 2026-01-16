@@ -4,14 +4,18 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
     const session = request.cookies.get("session");
     const isLoginPage = request.nextUrl.pathname === "/login";
+    const isSignupPage = request.nextUrl.pathname === "/signup";
 
-    // If user is on login page and has session, redirect to dashboard
-    if (isLoginPage && session) {
+    // If user is on login/signup page and has session, redirect to dashboard
+    if ((isLoginPage || isSignupPage) && session) {
         return NextResponse.redirect(new URL("/", request.url));
     }
 
-    // If user is accessing protected route (not login, not public assets)
-    if (!session && !isLoginPage) {
+    // If user is accessing protected route (not login/signup, not public assets)
+    if (!session && !isLoginPage && !isSignupPage) {
+        if (request.nextUrl.pathname.startsWith('/api')) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
         return NextResponse.redirect(new URL("/login", request.url));
     }
 

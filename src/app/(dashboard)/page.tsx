@@ -1,12 +1,12 @@
 "use client";
 
-import { StatCard } from "@/components/StatCard";
+import { StatCard } from "@/components/features/dashboard/StatCard";
 import { Users, Calendar, Activity, PieChart, Plus, UserPlus, Send, FileText, Lock, Clock, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { NotificationsDropdown } from "@/components/NotificationsDropdown";
+import { NotificationsDropdown } from "@/components/features/layout/NotificationsDropdown";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { useEffect, useState } from "react";
-import { MemberModal } from "@/components/MemberModal";
+import { MemberModal } from "@/components/features/members/MemberModal";
 import clsx from "clsx";
 
 const BudgetStatus = () => {
@@ -52,7 +52,6 @@ export default function Home() {
     };
     const name = decodeURIComponent(getCookie("user_name") || "");
     const role = decodeURIComponent(getCookie("user_role") || "");
-    console.log("Logged in as:", { name, role });
     setUser({ name, role });
 
     // Fetch Metrics
@@ -121,8 +120,6 @@ export default function Home() {
         });
 
         const text = await res.text();
-        console.log("API Response Status:", res.status);
-        console.log("API Response Text:", text);
 
         let data;
         try {

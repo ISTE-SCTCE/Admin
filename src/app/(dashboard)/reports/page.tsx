@@ -1,9 +1,9 @@
 "use client";
 
-import { FileUploader } from "@/components/FileUploader";
-import { FileItem } from "@/components/FileItem";
-import { FolderModal } from "@/components/FolderModal";
-import { FolderItem } from "@/components/FolderItem";
+import { FileUploader } from "@/components/features/files/FileUploader";
+import { FileItem } from "@/components/features/files/FileItem";
+import { FolderModal } from "@/components/features/files/FolderModal";
+import { FolderItem } from "@/components/features/files/FolderItem";
 import { FileIcon, Search, Filter, FolderPlus, Home, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";

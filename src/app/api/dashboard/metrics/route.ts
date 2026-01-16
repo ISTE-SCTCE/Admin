@@ -31,7 +31,6 @@ export async function POST(request: Request) {
         // RBAC: Only Chair, Vice Chair, Secretary, Admin
         const allowedRoles = ['chair', 'vice chair', 'secretary', 'admin'];
         if (!userRole || !allowedRoles.includes(userRole.toLowerCase())) {
-            console.warn(`User role '${userRole}' denied edit access.`);
             return NextResponse.json(
                 { error: 'Unauthorized: Only Chair, Vice Chair, Secretary, or Admin can edit metrics' },
                 { status: 403 }
@@ -39,10 +38,8 @@ export async function POST(request: Request) {
         }
 
         const body = await request.json();
-        console.log("Processing update for:", body);
 
         const updated = await db.metrics.update(body);
-        console.log("Update success:", updated);
 
         return NextResponse.json(updated);
     } catch (error: any) {

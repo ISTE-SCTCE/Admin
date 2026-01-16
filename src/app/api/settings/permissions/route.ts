@@ -29,9 +29,7 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
         }
 
-        console.log(`[API] Updating permission for ${action_key} to roles:`, allowed_roles);
         const updated = await db.permissions.update(action_key, allowed_roles);
-        console.log(`[API] Update successful for ${action_key}`);
         return NextResponse.json(updated);
     } catch (e) {
         console.error('Update permission error:', e);

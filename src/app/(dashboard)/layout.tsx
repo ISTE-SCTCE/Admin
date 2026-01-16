@@ -1,4 +1,4 @@
-import { NavigationDock } from "@/components/NavigationDock";
+import { NavigationDock } from "@/components/features/layout/NavigationDock";
 import { cookies } from "next/headers";
 
 export default async function DashboardLayout({
