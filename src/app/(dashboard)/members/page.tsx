@@ -243,25 +243,24 @@ export default function MembersPage() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                    ))}
-                </div>
-            )
-        }
+                            ))}
+                        </div>
+                    )
+                    }
 
-        {/* Chat Drawer */ }
-        <ChatDrawer
-            member={selectedMember}
-            isOpen={!!selectedMember}
-            onClose={() => setSelectedMember(null)}
-        />
+                    {/* Chat Drawer */}
+                    <ChatDrawer
+                        member={selectedMember}
+                        isOpen={!!selectedMember}
+                        onClose={() => setSelectedMember(null)}
+                    />
 
-        {/* Member Modal */ }
-        <MemberModal
-            isOpen={memberModalOpen}
-            onClose={() => setMemberModalOpen(false)}
-            onSubmit={handleAddMember}
-        />
-            </div >
+                    {/* Member Modal */}
+                    <MemberModal
+                        isOpen={memberModalOpen}
+                        onClose={() => setMemberModalOpen(false)}
+                        onSubmit={handleAddMember}
+                    />
+                </div >
             );
-    }
+        }
