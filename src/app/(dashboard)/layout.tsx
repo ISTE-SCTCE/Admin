@@ -1,5 +1,6 @@
 import { NavigationDock } from "@/components/features/layout/NavigationDock";
 import { BubbleMenu } from "@/components/ui/BubbleMenu";
+import { ChatNotifications } from "@/components/features/chat/ChatNotifications";
 import { cookies } from "next/headers";
 
 export default async function DashboardLayout({
@@ -41,6 +42,7 @@ export default async function DashboardLayout({
             </div>
 
             <main className="container mx-auto px-4 md:px-0 pt-24 md:pt-0">
+                <ChatNotifications />
                 {children}
             </main>
         </div>

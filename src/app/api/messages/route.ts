@@ -47,6 +47,10 @@ export async function POST(request: Request) {
         const body = await request.json();
         const { to, content } = body;
 
+        if (!to || !content) {
+            return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+        }
+
         const cookieStore = await cookies();
         const email = cookieStore.get("user_email")?.value;
 

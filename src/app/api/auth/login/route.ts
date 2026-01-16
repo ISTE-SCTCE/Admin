@@ -45,6 +45,14 @@ export async function POST(request: Request) {
                 path: "/",
             });
 
+            // Set user id for realtime subscriptions
+            cookieStore.set("user_id", user.id.toString(), {
+                httpOnly: false,
+                secure: process.env.NODE_ENV === "production",
+                maxAge: 60 * 60 * 24 * 7,
+                path: "/",
+            });
+
             return NextResponse.json({ success: true, user: { name: user.name, role: user.role } });
         }
 
