@@ -50,8 +50,8 @@ export function MemberModal({ isOpen, onClose, onSubmit, initialData }: MemberMo
             department: formData.get('department'),
             plan: formData.get('plan'),
             forum: formData.get('forum'),
-            joined_date: formData.get('joined_date'),
-            membership_expiry: formData.get('membership_expiry')
+            joined_date: formData.get('joined_date') || null,
+            membership_expiry: formData.get('membership_expiry') || null
         };
 
         try {

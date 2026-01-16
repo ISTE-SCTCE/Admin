@@ -35,7 +35,8 @@ export async function PUT(
         }
 
         // 2. Update Member
-        await db.members.update(parseInt(id), body);
+        const { id: _id, ...updateData } = body; // Strip ID from body
+        await db.members.update(parseInt(id), updateData);
 
         // 3. Sync changes to Users table
         // We use the OLD email to find the user, then update them.
