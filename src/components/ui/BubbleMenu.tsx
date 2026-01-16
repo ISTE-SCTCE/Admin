@@ -188,11 +188,18 @@ export function BubbleMenu({
         }
         @media (max-width: 899px) {
           .bubble-menu-items {
-            padding-top: 120px;
+            padding-top: 100px;
+            padding-bottom: 40px;
             align-items: flex-start;
+            overflow-y: auto;
+            pointer-events: auto !important;
+            -webkit-overflow-scrolling: touch;
           }
           .bubble-menu-items .pill-list {
-            row-gap: 16px;
+            row-gap: 12px;
+            width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
           }
           .bubble-menu-items .pill-list .pill-col {
             flex: 0 0 100% !important;
@@ -200,17 +207,19 @@ export function BubbleMenu({
             overflow: visible;
           }
           .bubble-menu-items .pill-link {
-            font-size: clamp(1.2rem, 3vw, 4rem);
-            padding: clamp(1rem, 2vw, 2rem) 0;
-            min-height: 80px !important;
+            font-size: clamp(1.2rem, 5vw, 2rem);
+            padding: 1.5rem 0;
+            min-height: auto !important;
+            white-space: normal;
+            height: auto;
           }
           .bubble-menu-items .pill-link:hover {
-            transform: scale(1.06);
+            transform: scale(1.02);
             background: var(--hover-bg);
             color: var(--hover-color);
           }
           .bubble-menu-items .pill-link:active {
-            transform: scale(.94);
+            transform: scale(0.98);
           }
         }
       `}</style>
@@ -299,7 +308,6 @@ export function BubbleMenu({
                         useFixedPosition ? 'fixed' : 'absolute',
                         'inset-0',
                         'flex items-center justify-center',
-                        'pointer-events-none',
                         'z-[1000]'
                     ].join(' ')}
                     aria-hidden={!isMenuOpen}
