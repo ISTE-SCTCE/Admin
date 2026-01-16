@@ -102,14 +102,17 @@ export default function MembersPage() {
                 body: JSON.stringify({ role })
             });
 
-            if (!res.ok) throw new Error("Failed to appoint member");
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.error || "Failed to appoint member");
+            }
 
             fetchMembers();
             setAppointModalOpen(false);
             setAppointingMember(null);
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
-            alert("Failed to appoint member. Please try again.");
+            alert(error.message || "Failed to appoint member. Please try again.");
         }
     }
 
