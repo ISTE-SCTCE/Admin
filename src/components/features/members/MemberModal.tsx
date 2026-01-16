@@ -1,17 +1,35 @@
 "use client";
 
 import { X, User, Mail, Phone, Lock, Briefcase } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface MemberModalProps {
     isOpen: boolean;
     onClose: () => void;
     onSubmit: (data: any) => Promise<void>;
+    initialData?: any;
 }
 
-export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
+export function MemberModal({ isOpen, onClose, onSubmit, initialData }: MemberModalProps) {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
+
+    // Use default values if no initialData provided
+    const defaultData = {
+        name: "",
+        email: "",
+        phone: "",
+        role: "Member",
+        password: "",
+        year: "",
+        department: "",
+        plan: "",
+        forum: "",
+        joined_date: new Date().toISOString().split('T')[0],
+        membership_expiry: ""
+    };
+
+    const data = initialData || defaultData;
 
     if (!isOpen) return null;
 
@@ -20,12 +38,14 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
         setError("");
         setIsLoading(true);
         const formData = new FormData(e.target as HTMLFormElement);
-        const data = {
+        const submitData = {
+            id: initialData?.id, // Includes ID if editing
             name: formData.get('name'),
             email: formData.get('email'),
             phone: formData.get('phone'),
             role: formData.get('role'),
-            password: formData.get('password'),
+            // Only include password if it's changing or new user
+            ...(formData.get('password') ? { password: formData.get('password') } : {}),
             year: formData.get('year'),
             department: formData.get('department'),
             plan: formData.get('plan'),
@@ -35,10 +55,10 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
         };
 
         try {
-            await onSubmit(data);
+            await onSubmit(submitData);
             onClose();
         } catch (err: any) {
-            setError(err.message || 'Failed to add member');
+            setError(err.message || 'Failed to save member');
         } finally {
             setIsLoading(false);
         }
@@ -46,9 +66,9 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div className="bg-surface rounded-2xl w-full max-w-md shadow-2xl overflow-hidden scale-100 animate-in fade-in zoom-in duration-200">
-                <header className="px-6 py-4 border-b border-border flex justify-between items-center bg-gray-50">
-                    <h2 className="text-lg font-bold text-text-primary">Add New Member</h2>
+            <div className="bg-surface rounded-2xl w-full max-w-md shadow-2xl overflow-hidden scale-100 animate-in fade-in zoom-in duration-200 h-[90vh] overflow-y-auto">
+                <header className="px-6 py-4 border-b border-border flex justify-between items-center bg-gray-50 sticky top-0 z-10">
+                    <h2 className="text-lg font-bold text-text-primary">{initialData ? 'Edit Member' : 'Add New Member'}</h2>
                     <button onClick={onClose} className="p-2 hover:bg-gray-200 rounded-full text-text-secondary transition-colors">
                         <X size={20} />
                     </button>
@@ -68,6 +88,7 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
                             <input
                                 name="name"
                                 required
+                                defaultValue={data.name}
                                 placeholder="John Doe"
                                 className="w-full pl-10 pr-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none"
                             />
@@ -82,6 +103,7 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
                                 name="email"
                                 type="email"
                                 required
+                                defaultValue={data.email}
                                 placeholder="john@example.com"
                                 className="w-full pl-10 pr-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none"
                             />
@@ -95,6 +117,7 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
                                 <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={18} />
                                 <input
                                     name="phone"
+                                    defaultValue={data.phone}
                                     placeholder="123-456-7890"
                                     className="w-full pl-10 pr-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none"
                                 />
@@ -104,7 +127,12 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
                             <label className="block text-sm font-medium text-text-secondary mb-1">Role</label>
                             <div className="relative">
                                 <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={18} />
-                                <select name="role" required className="w-full pl-10 pr-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none bg-white">
+                                <select
+                                    name="role"
+                                    required
+                                    defaultValue={data.role}
+                                    className="w-full pl-10 pr-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none bg-white"
+                                >
                                     <option value="Member">Member</option>
                                     <option value="Secretary">Secretary</option>
                                     <option value="Vice Chair">Vice Chair</option>
@@ -118,7 +146,11 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium text-text-secondary mb-1">Year</label>
-                            <select name="year" className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none bg-white">
+                            <select
+                                name="year"
+                                defaultValue={data.year}
+                                className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none bg-white"
+                            >
                                 <option value="">Select Year</option>
                                 <option value="1st Year">1st Year</option>
                                 <option value="2nd Year">2nd Year</option>
@@ -128,7 +160,11 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-text-secondary mb-1">Department</label>
-                            <select name="department" className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none bg-white">
+                            <select
+                                name="department"
+                                defaultValue={data.department}
+                                className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none bg-white"
+                            >
                                 <option value="">Select Dept</option>
                                 <option value="CSE">CSE</option>
                                 <option value="ECE">ECE</option>
@@ -143,16 +179,22 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium text-text-secondary mb-1">Plan</label>
-                            <input
+                            <select
                                 name="plan"
-                                placeholder="Basic / Premium"
-                                className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none"
-                            />
+                                defaultValue={data.plan}
+                                className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none bg-white"
+                            >
+                                <option value="">Select Plan</option>
+                                <option value="One Year">One Year</option>
+                                <option value="Two Year">Two Year</option>
+                                <option value="Four Year">Four Year</option>
+                            </select>
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-text-secondary mb-1">Forum</label>
                             <input
                                 name="forum"
+                                defaultValue={data.forum}
                                 placeholder="SwaS / Main"
                                 className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none"
                             />
@@ -165,7 +207,7 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
                             <input
                                 name="joined_date"
                                 type="date"
-                                defaultValue={new Date().toISOString().split('T')[0]}
+                                defaultValue={data.joined_date ? new Date(data.joined_date).toISOString().split('T')[0] : ''}
                                 className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none"
                             />
                         </div>
@@ -174,31 +216,32 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
                             <input
                                 name="membership_expiry"
                                 type="date"
+                                defaultValue={data.membership_expiry ? new Date(data.membership_expiry).toISOString().split('T')[0] : ''}
                                 className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-text-secondary mb-1">Password</label>
+                        <label className="block text-sm font-medium text-text-secondary mb-1">Password {initialData && '(Leave blank to keep current)'}</label>
                         <div className="relative">
                             <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={18} />
                             <input
                                 name="password"
                                 type="password"
-                                required
-                                placeholder="Set initial password"
+                                required={!initialData} // Only required for new users
+                                placeholder={initialData ? "Enter new password to change" : "Set initial password"}
                                 className="w-full pl-10 pr-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none"
                             />
                         </div>
                     </div>
 
-                    <div className="pt-2 flex justify-end gap-3">
+                    <div className="pt-2 flex justify-end gap-3 sticky bottom-0 bg-white p-4 -mx-6 -mb-6 border-t border-border">
                         <button type="button" onClick={onClose} disabled={isLoading} className="px-4 py-2 text-text-secondary hover:bg-gray-50 rounded-lg font-medium">
                             Cancel
                         </button>
                         <button type="submit" disabled={isLoading} className="px-6 py-2 bg-primary text-white rounded-lg font-medium hover:bg-blue-600 transition-colors shadow-sm disabled:opacity-50">
-                            {isLoading ? 'Adding...' : 'Add Member'}
+                            {isLoading ? 'Saving...' : (initialData ? 'Update Member' : 'Add Member')}
                         </button>
                     </div>
                 </form>

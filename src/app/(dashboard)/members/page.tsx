@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MessageCircle, MoreVertical, Search, Filter } from "lucide-react";
+import { MessageCircle, MoreVertical, Search, Filter, Edit2 } from "lucide-react";
 import clsx from "clsx";
 import { ChatDrawer } from "@/components/features/members/ChatDrawer";
 import { MemberModal } from "@/components/features/members/MemberModal";
@@ -28,16 +28,32 @@ export default function MembersPage() {
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
     const [memberModalOpen, setMemberModalOpen] = useState(false);
-    const [isTableView, setIsTableView] = useState(true); // Default to table for detailed view
+    const [editingMember, setEditingMember] = useState<Member | null>(null);
+    const [isTableView, setIsTableView] = useState(true);
+    const [activeTab, setActiveTab] = useState<'all' | 'execom'>('all');
+    const [currentUserRole, setCurrentUserRole] = useState<string>("");
 
     useEffect(() => {
         fetchMembers();
+        fetchCurrentUser();
         const interval = setInterval(async () => {
             await fetch('/api/auth/heartbeat', { method: 'POST' });
             fetchMembers();
         }, 5000);
         return () => clearInterval(interval);
     }, []);
+
+    async function fetchCurrentUser() {
+        try {
+            const res = await fetch('/api/auth/me');
+            if (res.ok) {
+                const data = await res.json();
+                setCurrentUserRole(data.role?.toLowerCase() || "");
+            }
+        } catch (error) {
+            console.error("Failed to fetch current user role");
+        }
+    }
 
     async function fetchMembers() {
         try {
@@ -51,23 +67,41 @@ export default function MembersPage() {
         }
     }
 
-    async function handleAddMember(data: any) {
-        const res = await fetch('/api/members', {
-            method: 'POST',
+    async function handleMemberSubmit(data: any) {
+        const isEdit = !!data.id;
+        const method = isEdit ? 'PUT' : 'POST';
+        const url = isEdit ? `/api/members/${data.id}` : '/api/members';
+
+        const res = await fetch(url, {
+            method,
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
 
         if (!res.ok) {
             const error = await res.json();
-            throw new Error(error.error || 'Failed to add member');
+            throw new Error(error.error || `Failed to ${isEdit ? 'update' : 'add'} member`);
         }
 
         fetchMembers(); // Refresh list
         setMemberModalOpen(false);
+        setEditingMember(null);
+    }
+
+    function handleEditClick(member: Member) {
+        setEditingMember(member);
+        setMemberModalOpen(true);
     }
 
     const filteredMembers = members.filter(member => {
+        // Filter by Tab
+        if (activeTab === 'execom') {
+            const execomRoles = ['chair', 'vice chair', 'secretary', 'admin'];
+            const isExecom = execomRoles.some(r => member.role.toLowerCase().includes(r));
+            if (!isExecom) return false;
+        }
+
+        // Filter by Search
         if (!searchQuery.trim()) return true;
         const query = searchQuery.toLowerCase();
         return (
@@ -77,6 +111,8 @@ export default function MembersPage() {
             member.year?.toLowerCase().includes(query)
         );
     });
+
+    const canEdit = ['chair', 'vice chair', 'secretary', 'admin'].includes(currentUserRole);
 
     return (
         <div className="p-8 relative">
@@ -92,25 +128,59 @@ export default function MembersPage() {
                     >
                         {isTableView ? "Grid View" : "Table View"}
                     </button>
-                    <button className="btn-primary" onClick={() => setMemberModalOpen(true)}>Add Member</button>
+                    {(canEdit || currentUserRole === 'admin') && (
+                        <button
+                            className="btn-primary"
+                            onClick={() => {
+                                setEditingMember(null);
+                                setMemberModalOpen(true);
+                            }}
+                        >
+                            Add Member
+                        </button>
+                    )}
                 </div>
             </header>
 
-            {/* Filters */}
-            <div className="mb-6 flex gap-4">
-                <div className="relative flex-1 max-w-md">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={18} />
-                    <input
-                        type="text"
-                        placeholder="Search by name, role, dept..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border bg-surface focus:border-primary focus:outline-none"
-                    />
+            {/* Tabs & Filters */}
+            <div className="mb-6 flex flex-col md:flex-row gap-4 justify-between">
+                <div className="flex p-1 bg-surface border border-border rounded-xl w-fit">
+                    <button
+                        onClick={() => setActiveTab('all')}
+                        className={clsx(
+                            "px-6 py-2 rounded-lg text-sm font-medium transition-all",
+                            activeTab === 'all'
+                                ? "bg-primary text-white shadow-sm"
+                                : "text-text-secondary hover:text-text-primary"
+                        )}
+                    >
+                        All Members
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('execom')}
+                        className={clsx(
+                            "px-6 py-2 rounded-lg text-sm font-medium transition-all",
+                            activeTab === 'execom'
+                                ? "bg-primary text-white shadow-sm"
+                                : "text-text-secondary hover:text-text-primary"
+                        )}
+                    >
+                        Execom
+                    </button>
                 </div>
-                <button className="p-2.5 border border-border rounded-xl bg-surface hover:bg-gray-50 text-text-secondary">
-                    <Filter size={20} />
-                </button>
+
+                <div className="flex gap-4">
+                    <div className="relative flex-1 max-w-md min-w-[300px]">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={18} />
+                        <input
+                            type="text"
+                            placeholder="Search by name, role, dept..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border bg-surface focus:border-primary focus:outline-none"
+                        />
+                    </div>
+                </div>
             </div>
 
             {loading ? (
@@ -176,13 +246,24 @@ export default function MembersPage() {
                                             )}
                                         </td>
                                         <td className="px-6 py-4 text-right">
-                                            <button
-                                                onClick={() => setSelectedMember(member)}
-                                                className="p-2 hover:bg-blue-50 text-text-secondary hover:text-primary rounded-lg transition-colors"
-                                                title="Chat"
-                                            >
-                                                <MessageCircle size={18} />
-                                            </button>
+                                            <div className="flex items-center justify-end gap-2">
+                                                {canEdit && (
+                                                    <button
+                                                        onClick={() => handleEditClick(member)}
+                                                        className="p-2 hover:bg-blue-50 text-text-secondary hover:text-primary rounded-lg transition-colors"
+                                                        title="Edit Member"
+                                                    >
+                                                        <Edit2 size={18} />
+                                                    </button>
+                                                )}
+                                                <button
+                                                    onClick={() => setSelectedMember(member)}
+                                                    className="p-2 hover:bg-blue-50 text-text-secondary hover:text-primary rounded-lg transition-colors"
+                                                    title="Chat"
+                                                >
+                                                    <MessageCircle size={18} />
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}
@@ -194,8 +275,19 @@ export default function MembersPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredMembers.map((member) => (
                         <div key={member.id} className="bg-surface p-6 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow group relative">
-                            <div className="absolute top-4 right-4 text-text-tertiary cursor-pointer hover:text-text-primary">
-                                <MoreVertical size={20} />
+                            <div className="absolute top-4 right-4 flex gap-2">
+                                {canEdit && (
+                                    <button
+                                        onClick={() => handleEditClick(member)}
+                                        className="text-text-tertiary hover:text-primary transition-colors"
+                                        title="Edit"
+                                    >
+                                        <Edit2 size={18} />
+                                    </button>
+                                )}
+                                <div className="text-text-tertiary cursor-pointer hover:text-text-primary">
+                                    <MoreVertical size={20} />
+                                </div>
                             </div>
 
                             <div className="flex flex-col items-center text-center">
@@ -263,8 +355,12 @@ export default function MembersPage() {
             {/* Member Modal */}
             <MemberModal
                 isOpen={memberModalOpen}
-                onClose={() => setMemberModalOpen(false)}
-                onSubmit={handleAddMember}
+                onClose={() => {
+                    setMemberModalOpen(false);
+                    setEditingMember(null);
+                }}
+                onSubmit={handleMemberSubmit}
+                initialData={editingMember}
             />
         </div>
     );
