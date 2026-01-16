@@ -75,6 +75,7 @@ export function AppointExecomModal({ isOpen, onClose, onSubmit, memberName }: Ap
                             <option value="Sub Treasury">Sub Treasury</option>
                             <option value="Activity Coordinator">Activity Coordinator</option>
                             <option value="Marketing Team">Marketing Team</option>
+                            <option value="Technical Team">Technical Team</option>
                         </select>
                     </div>
 

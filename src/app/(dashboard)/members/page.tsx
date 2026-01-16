@@ -135,7 +135,7 @@ export default function MembersPage() {
             const execomRoles = [
                 'chair', 'vice chair', 'secretary', 'admin',
                 'media team', 'design team', 'treasury', 'sub treasury',
-                'activity coordinator', 'marketing team'
+                'activity coordinator', 'marketing team', 'technical team'
             ];
             const isExecom = execomRoles.some(r => role.includes(r));
             if (!isExecom) return false;
