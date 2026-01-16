@@ -43,7 +43,7 @@ export async function GET() {
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { name, email, phone, role, password } = body;
+        const { name, email, phone, role, password, year, department, plan, forum, joined_date, membership_expiry } = body;
 
         // RBAC Check
         const cookieStore = await cookies();
@@ -86,7 +86,12 @@ export async function POST(request: Request) {
             email,
             phone,
             status: 'active',
-            joined_date: new Date().toISOString().split('T')[0],
+            joined_date: joined_date || new Date().toISOString().split('T')[0],
+            year,
+            department,
+            plan,
+            forum,
+            membership_expiry: membership_expiry || null,
             created_at: new Date().toISOString()
         };
 

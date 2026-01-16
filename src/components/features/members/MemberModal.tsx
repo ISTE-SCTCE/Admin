@@ -25,7 +25,13 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
             email: formData.get('email'),
             phone: formData.get('phone'),
             role: formData.get('role'),
-            password: formData.get('password')
+            password: formData.get('password'),
+            year: formData.get('year'),
+            department: formData.get('department'),
+            plan: formData.get('plan'),
+            forum: formData.get('forum'),
+            joined_date: formData.get('joined_date'),
+            membership_expiry: formData.get('membership_expiry')
         };
 
         try {
@@ -106,6 +112,70 @@ export function MemberModal({ isOpen, onClose, onSubmit }: MemberModalProps) {
                                     <option value="Admin">Admin</option>
                                 </select>
                             </div>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-text-secondary mb-1">Year</label>
+                            <select name="year" className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none bg-white">
+                                <option value="">Select Year</option>
+                                <option value="1st Year">1st Year</option>
+                                <option value="2nd Year">2nd Year</option>
+                                <option value="3rd Year">3rd Year</option>
+                                <option value="4th Year">4th Year</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-text-secondary mb-1">Department</label>
+                            <select name="department" className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none bg-white">
+                                <option value="">Select Dept</option>
+                                <option value="CSE">CSE</option>
+                                <option value="ECE">ECE</option>
+                                <option value="EEE">EEE</option>
+                                <option value="ME">ME</option>
+                                <option value="CE">CE</option>
+                                <option value="BT">BT</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-text-secondary mb-1">Plan</label>
+                            <input
+                                name="plan"
+                                placeholder="Basic / Premium"
+                                className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-text-secondary mb-1">Forum</label>
+                            <input
+                                name="forum"
+                                placeholder="SwaS / Main"
+                                className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-text-secondary mb-1">Joined Date</label>
+                            <input
+                                name="joined_date"
+                                type="date"
+                                defaultValue={new Date().toISOString().split('T')[0]}
+                                className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-text-secondary mb-1">Expiry Date</label>
+                            <input
+                                name="membership_expiry"
+                                type="date"
+                                className="w-full px-4 py-2 rounded-xl border border-border focus:border-primary focus:outline-none"
+                            />
                         </div>
                     </div>
 
