@@ -74,7 +74,7 @@ export function BubbleMenu({
         useFixedPosition ? 'fixed' : 'absolute',
         'left-0 right-0 top-8',
         'flex items-center justify-between',
-        'gap-4 px-8',
+        'gap-4 px-4 md:px-8',
         'pointer-events-none',
         'z-[1001]',
         className

@@ -33,7 +33,7 @@ export default async function DashboardLayout({
             {/* Mobile Navigation */}
             <div className="md:hidden">
                 <BubbleMenu
-                    logo={<span className="font-bold text-xl tracking-tighter">ADMIN</span>}
+                    logo={<span className="font-bold text-xl tracking-tighter">ISTE</span>}
                     items={menuItems}
                     useFixedPosition={true}
                     className="top-4"
