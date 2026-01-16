@@ -243,7 +243,7 @@ export default function MembersPage() {
                                         </div>
                                     </div>
                                 </div>
-                        </div>
+                            </div>
                     ))}
                 </div>
             )
