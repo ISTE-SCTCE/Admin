@@ -40,7 +40,7 @@ export default async function DashboardLayout({
                 />
             </div>
 
-            <main className="container mx-auto px-4 md:px-0">
+            <main className="container mx-auto px-4 md:px-0 pt-24 md:pt-0">
                 {children}
             </main>
         </div>
