@@ -94,10 +94,18 @@ export default function MembersPage() {
     }
 
     const filteredMembers = members.filter(member => {
+        // Safe access to properties
+        const role = member.role?.toLowerCase() || "";
+        const name = member.name?.toLowerCase() || "";
+        const department = member.department?.toLowerCase() || "";
+        const year = member.year?.toLowerCase() || "";
+        const plan = member.plan?.toLowerCase() || "";
+        const forum = member.forum?.toLowerCase() || "";
+
         // Filter by Tab
         if (activeTab === 'execom') {
             const execomRoles = ['chair', 'vice chair', 'secretary', 'admin'];
-            const isExecom = execomRoles.some(r => member.role.toLowerCase().includes(r));
+            const isExecom = execomRoles.some(r => role.includes(r));
             if (!isExecom) return false;
         }
 
@@ -105,10 +113,12 @@ export default function MembersPage() {
         if (!searchQuery.trim()) return true;
         const query = searchQuery.toLowerCase();
         return (
-            member.name.toLowerCase().includes(query) ||
-            member.role.toLowerCase().includes(query) ||
-            member.department?.toLowerCase().includes(query) ||
-            member.year?.toLowerCase().includes(query)
+            name.includes(query) ||
+            role.includes(query) ||
+            department.includes(query) ||
+            year.includes(query) ||
+            plan.includes(query) ||
+            forum.includes(query)
         );
     });
 
