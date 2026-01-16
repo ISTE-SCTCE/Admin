@@ -283,7 +283,7 @@ export default function MembersPage() {
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex items-center justify-end gap-2">
-                                                {isChair && !['chair', 'vice chair', 'secretary'].includes(member.role.toLowerCase()) && (
+                                                {isChair && !['chair', 'vice chair', 'secretary'].includes((member.role?.toLowerCase() || "")) && (
                                                     <button
                                                         onClick={() => {
                                                             setAppointingMember(member);
@@ -324,7 +324,7 @@ export default function MembersPage() {
                     {filteredMembers.map((member) => (
                         <div key={member.id} className="bg-surface p-6 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow group relative">
                             <div className="absolute top-4 right-4 flex gap-2">
-                                {isChair && !['chair', 'vice chair', 'secretary'].includes(member.role.toLowerCase()) && (
+                                {isChair && !['chair', 'vice chair', 'secretary'].includes((member.role?.toLowerCase() || "")) && (
                                     <button
                                         onClick={() => {
                                             setAppointingMember(member);
