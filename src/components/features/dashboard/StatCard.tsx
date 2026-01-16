@@ -25,13 +25,13 @@ export function StatCard({ label, value, change, isPositive, icon: Icon, iconBgC
                 borderWidth={2}
                 movementDuration={1.5}
             />
-            <div className="relative bg-surface p-6 rounded-xl shadow-md flex gap-4 transition-all hover:-translate-y-1 hover:shadow-xl">
+            <div className="relative bg-surface p-6 rounded-xl shadow-md flex items-center gap-4 transition-all hover:-translate-y-1 hover:shadow-xl">
                 <div
                     className={clsx("w-14 h-14 rounded-lg flex items-center justify-center shrink-0 text-white", iconBgClass)}
                 >
                     <Icon size={24} strokeWidth={2} />
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                     <div className="text-sm text-text-secondary mb-1 flex justify-between items-center">
                         {label}
                         {onEdit && (

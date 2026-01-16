@@ -25,7 +25,7 @@ export default async function DashboardLayout({
     ];
 
     return (
-        <div className="min-h-screen bg-background pb-32">
+        <div className="min-h-screen bg-background pb-32 overflow-x-hidden">
             {/* Desktop Navigation */}
             <div className="hidden md:block">
                 <NavigationDock user={user} />
@@ -36,7 +36,7 @@ export default async function DashboardLayout({
                 <BubbleMenu
                     logo={<span className="font-bold text-xl tracking-tighter">ISTE</span>}
                     items={menuItems}
-                    useFixedPosition={true}
+                    useFixedPosition={false}
                     className="top-4"
                 />
             </div>

@@ -188,7 +188,7 @@ export default function Home() {
   return (
     <div className="p-4 md:p-8">
       {/* Header */}
-      <header className="flex justify-between items-start mb-8">
+      <header className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold mb-2 text-text-primary capitalize">
             {user.name && user.role ? `${user.name} - ${user.role}` : 'Dashboard'}

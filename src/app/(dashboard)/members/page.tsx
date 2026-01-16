@@ -7,7 +7,6 @@ import { ChatDrawer } from "@/components/features/members/ChatDrawer";
 import { MemberModal } from "@/components/features/members/MemberModal";
 import { AppointExecomModal } from "@/components/features/members/AppointExecomModal";
 
-// Define Member type locally for now or import from shared types
 interface Member {
     id: number;
     name: string;
@@ -87,7 +86,7 @@ export default function MembersPage() {
             throw new Error(error.error || `Failed to ${isEdit ? 'update' : 'add'} member`);
         }
 
-        fetchMembers(); // Refresh list
+        fetchMembers();
         setMemberModalOpen(false);
         setEditingMember(null);
     }
@@ -122,7 +121,6 @@ export default function MembersPage() {
     }
 
     const filteredMembers = members.filter(member => {
-        // Safe access to properties
         const role = member.role?.toLowerCase() || "";
         const name = member.name?.toLowerCase() || "";
         const department = member.department?.toLowerCase() || "";
@@ -130,7 +128,6 @@ export default function MembersPage() {
         const plan = member.plan?.toLowerCase() || "";
         const forum = member.forum?.toLowerCase() || "";
 
-        // Filter by Tab
         if (activeTab === 'execom') {
             const execomRoles = [
                 'chair', 'vice chair', 'secretary', 'admin',
@@ -141,7 +138,6 @@ export default function MembersPage() {
             if (!isExecom) return false;
         }
 
-        // Filter by Search
         if (!searchQuery.trim()) return true;
         const query = searchQuery.toLowerCase();
         return (
@@ -185,7 +181,6 @@ export default function MembersPage() {
                 </div>
             </header>
 
-            {/* Tabs & Filters */}
             <div className="mb-6 flex flex-col md:flex-row gap-4 justify-between">
                 <div className="flex p-1 bg-surface border border-border rounded-xl w-fit">
                     <button
@@ -212,8 +207,8 @@ export default function MembersPage() {
                     </button>
                 </div>
 
-                <div className="flex gap-4">
-                    <div className="relative flex-1 max-w-md min-w-[300px]">
+                <div className="flex gap-4 w-full md:w-auto">
+                    <div className="relative flex-1 w-full md:w-96">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={18} />
                         <input
                             type="text"
@@ -412,14 +407,12 @@ export default function MembersPage() {
                 </div>
             )}
 
-            {/* Chat Drawer */}
             <ChatDrawer
                 member={selectedMember}
                 isOpen={!!selectedMember}
                 onClose={() => setSelectedMember(null)}
             />
 
-            {/* Member Modal */}
             <MemberModal
                 isOpen={memberModalOpen}
                 onClose={() => {
@@ -430,7 +423,6 @@ export default function MembersPage() {
                 initialData={editingMember}
             />
 
-            {/* Appoint Execom Modal */}
             <AppointExecomModal
                 isOpen={appointModalOpen}
                 onClose={() => {
